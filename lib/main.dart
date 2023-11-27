@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:ecommerce_mobile_app/L10n/L10n.dart';
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:ecommerce_mobile_app/bloc/state_observer.dart';
@@ -21,26 +22,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+    return AdaptiveTheme(
+      light: ThemeData(
         useMaterial3: true,
+        brightness: Brightness.light,
+        colorSchemeSeed: Colors.blue,
       ),
-      supportedLocales: L10N.all,
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider<CounterBloc>(
-            create: (BuildContext context) => CounterBloc(),
-          ),
+      dark: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorSchemeSeed: Colors.blue,
+      ),
+      initial: AdaptiveThemeMode.light,
+      builder: (theme, darkTheme) => MaterialApp(
+        title: 'Flutter Demo',
+        // theme: ThemeData(
+        //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        //   useMaterial3: true,
+        // ),
+        theme: theme,
+        supportedLocales: L10N.all,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
         ],
-        child: CounterView(),
+        home: MultiBlocProvider(
+          providers: [
+            BlocProvider<CounterBloc>(
+              create: (BuildContext context) => CounterBloc(),
+            ),
+          ],
+          child: CounterView(),
+        ),
       ),
     );
   }

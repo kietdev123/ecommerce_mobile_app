@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:ecommerce_mobile_app/l10n/gen/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ class CounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('hello'),
+      ),
       body: Column(
         children: [
           Center(
@@ -26,6 +30,17 @@ class CounterView extends StatelessWidget {
             ),
           ),
           Text(AppLocalizations.of(context)!.hello),
+          Text(AdaptiveTheme.of(context).mode.isDark ? 'dark' : 'light'),
+          Switch(
+            value: AdaptiveTheme.of(context).mode.isDark,
+            onChanged: (value) {
+              if (value) {
+                AdaptiveTheme.of(context).setDark();
+              } else {
+                AdaptiveTheme.of(context).setLight();
+              }
+            },
+          ),
         ],
       ),
       floatingActionButton: Column(
