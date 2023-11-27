@@ -1,4 +1,4 @@
-import 'package:ecommerce_mobile_app/bloc/counter/counter_cubit.dart';
+import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,9 +15,9 @@ class CounterView extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Center(
-        child: BlocBuilder<CounterCubit, int>(
+        child: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) {
-            return Text('$state', style: textTheme.displayMedium);
+            return Text('${state.countValue}', style: textTheme.displayMedium);
           },
         ),
       ),
@@ -28,13 +28,13 @@ class CounterView extends StatelessWidget {
           FloatingActionButton(
             key: const Key('counterView_increment_floatingActionButton'),
             child: const Icon(Icons.add),
-            onPressed: () => context.read<CounterCubit>().increment(),
+            onPressed: () => context.read<CounterBloc>().add(IncreaseCounter()),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
             key: const Key('counterView_decrement_floatingActionButton'),
             child: const Icon(Icons.remove),
-            onPressed: () => context.read<CounterCubit>().decrement(),
+            onPressed: () => context.read<CounterBloc>().add(DecreaseCounter()),
           ),
         ],
       ),

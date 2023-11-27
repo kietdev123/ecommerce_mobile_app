@@ -10,4 +10,10 @@ class StateObserver extends BlocObserver {
     // ignore: avoid_print
     print('${bloc.runtimeType} $change');
   }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(bloc, error, stackTrace);
+  }
 }
