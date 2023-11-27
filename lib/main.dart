@@ -1,8 +1,14 @@
+import 'package:ecommerce_mobile_app/L10n/L10n.dart';
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:ecommerce_mobile_app/bloc/state_observer.dart';
+import 'package:ecommerce_mobile_app/l10n/gen/app_localizations.dart';
 import 'package:ecommerce_mobile_app/views/counter/counter_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/src/widgets_localizations.dart';
+import 'package:flutter_localizations/src/material_localizations.dart';
+import 'package:flutter_localizations/src/cupertino_localizations.dart';
 
 void main() {
   Bloc.observer = const StateObserver();
@@ -21,6 +27,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      supportedLocales: L10N.all,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
       home: MultiBlocProvider(
         providers: [
           BlocProvider<CounterBloc>(

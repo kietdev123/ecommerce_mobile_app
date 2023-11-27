@@ -1,4 +1,5 @@
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
+import 'package:ecommerce_mobile_app/l10n/gen/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,12 +15,18 @@ class CounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
-      body: Center(
-        child: BlocBuilder<CounterBloc, CounterState>(
-          builder: (context, state) {
-            return Text('${state.countValue}', style: textTheme.displayMedium);
-          },
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: BlocBuilder<CounterBloc, CounterState>(
+              builder: (context, state) {
+                return Text('${state.countValue}',
+                    style: textTheme.displayMedium);
+              },
+            ),
+          ),
+          Text(AppLocalizations.of(context)!.hello),
+        ],
       ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,

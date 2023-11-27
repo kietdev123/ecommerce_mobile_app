@@ -1,0 +1,6 @@
+{
+    "language" : "English",
+    "@language" : {
+        "hello" : "hello english"
+    }
+}
