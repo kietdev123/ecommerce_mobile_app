@@ -1,7 +1,16 @@
+import 'package:ecommerce_mobile_app/bloc/state_observer.dart';
+import 'package:ecommerce_mobile_app/views/counter/counter_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  Bloc.observer = const StateObserver();
+  runApp(const CounterApp());
+}
+
+class CounterApp extends MaterialApp {
+  /// {@macro counter_app}
+  const CounterApp({super.key}) : super(home: const CounterPage());
 }
 
 class MyApp extends StatelessWidget {
