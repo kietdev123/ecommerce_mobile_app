@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:ecommerce_mobile_app/L10n/L10n.dart';
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:ecommerce_mobile_app/bloc/state_observer.dart';
 import 'package:ecommerce_mobile_app/l10n/gen/app_localizations.dart';
 import 'package:ecommerce_mobile_app/views/counter/counter_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +14,12 @@ import 'package:flutter_localizations/src/widgets_localizations.dart';
 import 'package:flutter_localizations/src/material_localizations.dart';
 import 'package:flutter_localizations/src/cupertino_localizations.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp();
+  }
+
   Bloc.observer = const StateObserver();
   runApp(const MyApp());
 }

@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_mobile_app/bloc/counter/counter_bloc.dart';
 import 'package:ecommerce_mobile_app/l10n/gen/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -57,6 +58,20 @@ class CounterView extends StatelessWidget {
             key: const Key('counterView_decrement_floatingActionButton'),
             child: const Icon(Icons.remove),
             onPressed: () => context.read<CounterBloc>().add(DecreaseCounter()),
+          ),
+          FloatingActionButton(
+            child: Text('add user firebase'),
+            onPressed: () async {
+              FirebaseFirestore.instance
+                  .collection('users')
+                  .add({
+                    'full_name': 'a', // John Doe
+                    'company': 'b', // Stokes and Sons
+                    'age': 'c' // 42
+                  })
+                  .then((value) => print("User Added"))
+                  .catchError((error) => print("Failed to add user: $error"));
+            },
           ),
         ],
       ),
